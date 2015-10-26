@@ -1,9 +1,10 @@
 React Native Gestures
 =====================
 
+:warning: This package is still in early stage, it will have a heaps of API changes before it move to 1.0 :warning:
+
 > React Native Composable Gesture Library
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 [![Build Status](https://travis-ci.org/kiddkai/react-native-gestures.svg)](https://travis-ci.org/kiddkai/react-native-gestures)
 [![npm version](http://img.shields.io/npm/v/react-native-gestures.svg?style=flat-square)](https://npmjs.org/package/react-native-gestures "View this project on npm")
 [![npm version](http://img.shields.io/npm/dm/react-native-gestures.svg?style=flat-square)](https://npmjs.org/package/react-native-gestures "View this project on npm")
@@ -56,3 +57,11 @@ export default React.createClass({
   }
 });
 ```
+
+Contribute
+----------
+
+Using 
+
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
