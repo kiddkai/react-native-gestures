@@ -17,10 +17,6 @@ var _create2 = _interopRequireDefault(_create);
 
 var _reactNative = require('react-native');
 
-var _reactNative2 = _interopRequireDefault(_reactNative);
-
-var _immutable = require('immutable');
-
 function draggableMixin(gestureDefs) {
   gestureDefs = gestureDefs || [];
 
@@ -98,5 +94,4 @@ function draggableMixin(gestureDefs) {
   };
 }
 
-;
 module.exports = exports['default'];

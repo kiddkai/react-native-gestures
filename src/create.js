@@ -1,7 +1,7 @@
-import { curry } from 'ramda';
-import withSpecificPointerNumbers from './withSpecificPointerNumbers';
+import { curry } from 'ramda'
+import withSpecificPointerNumbers from './withSpecificPointerNumbers'
 
-function createGesture(options, getInitialLayout, draggable) {
+function createGesture (options, getInitialLayout, draggable) {
   return draggable
     .onDragStart
     .flatMap(() => {
@@ -11,7 +11,7 @@ function createGesture(options, getInitialLayout, draggable) {
         getInitialLayout
       )
       .transduce(options.calculate)
-      .takeUntil(draggable.onDragRelease)});
+      .takeUntil(draggable.onDragRelease) })
 };
 
-export default curry(createGesture);
+export default curry(createGesture)

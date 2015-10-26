@@ -1,7 +1,7 @@
-import Rx from 'rx';
-import Immutable from 'immutable';
+import Rx from 'rx'
+import Immutable from 'immutable'
 
-function toImmutableTouch(touch) {
+function toImmutableTouch (touch) {
   return Immutable.Map({
     timestamp: touch.timestamp,
     target: touch.target,
@@ -10,31 +10,28 @@ function toImmutableTouch(touch) {
     locationY: touch.locationY,
     identifier: touch.identifier,
     pageX: touch.pageX
-  });
+  })
 }
 
-export default function withSpecificPointerNumbers(n, onMove, getInitialLayout) {
-  return Rx.Observable.create(function(o) {
-    var state = Immutable.Map();
-    var paused = false;
+export default function withSpecificPointerNumbers (n, onMove, getInitialLayout) {
+  return Rx.Observable.create(function (o) {
+    var state = Immutable.Map()
+    var paused = false
 
     onMove
       .subscribe(
-        function(event) {
+        function (event) {
           if (!event.touches) {
-            return;
+            return
           }
-          
-          let touches = event.touches;
+          let touches = event.touches
 
           if (touches.length === n) {
-            touches = touches.map(toImmutableTouch);
+            touches = touches.map(toImmutableTouch)
             if (!state.get('initialLayout')) {
-              state = state.withMutations(s => {
-                return s
-                  .set('initialLayout', Immutable.fromJS(getInitialLayout()))
-                  .set('initialTouches', Immutable.fromJS(touches));
-              });
+              state = state.withMutations(s => s
+                .set('initialLayout', Immutable.fromJS(getInitialLayout()))
+                .set('initialTouches', Immutable.fromJS(touches)))
             }
 
             state = state.withMutations(s => {
@@ -46,31 +43,27 @@ export default function withSpecificPointerNumbers(n, onMove, getInitialLayout) 
                 .set('locationY', event.locationY)
                 .set('identifier', event.identifier)
                 .set('touches', Immutable.fromJS(touches))
-                .set('timestamp', event.timestamp);
-            });
+                .set('timestamp', event.timestamp)
+            })
 
-            o.onNext(state);
-          }
-          else {
+            o.onNext(state)
+          } else {
             if (paused) {
-              return;
+              return
             }
 
-            state = state.withMutations(s => {
-              return s
-                .delete('initialLayout')
-                .delete('initialTouches');
-            });
-
-            paused = true;
+            state = state.withMutations(s => s
+              .delete('initialLayout')
+              .delete('initialTouches'))
+            paused = true
           }
         },
         o.onError.bind(o),
         o.onCompleted.bind(o)
-      );
+      )
 
-    return function() {
-      state = Immutable.Map();
-    }; 
-  });
+    return function () {
+      state = Immutable.Map()
+    }
+  })
 }

@@ -16,10 +16,6 @@ var _draggable = require('./draggable');
 
 var _draggable2 = _interopRequireDefault(_draggable);
 
-var _create = require('./create');
-
-var _create2 = _interopRequireDefault(_create);
-
 var _reactNative = require('react-native');
 
 var _reactNative2 = _interopRequireDefault(_reactNative);
@@ -28,10 +24,14 @@ exports['default'] = _reactNative2['default'].createClass({
   displayName: 'GestureView',
 
   mixins: [(0, _events2['default'])(['onLayout']), (0, _draggable2['default'])()],
+
   propTypes: {
     gestures: _reactNative.PropTypes.array.isRequired,
-    onError: _reactNative.PropTypes.func.isRequired
+    onError: _reactNative.PropTypes.func.isRequired,
+    style: _reactNative.PropTypes.any,
+    children: _reactNative.PropTypes.array
   },
+
   componentDidMount: function componentDidMount() {
     var _this = this;
 
@@ -45,9 +45,10 @@ exports['default'] = _reactNative2['default'].createClass({
         }
       });
     }, function (err) {
-      return _this.props.onError;
+      return _this.props.onError(err);
     });
   },
+
   render: function render() {
     var _this2 = this;
 

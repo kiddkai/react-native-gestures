@@ -36,7 +36,6 @@ function withSpecificPointerNumbers(n, onMove, getInitialLayout) {
       if (!event.touches) {
         return;
       }
-
       var touches = event.touches;
 
       if (touches.length === n) {
@@ -60,7 +59,6 @@ function withSpecificPointerNumbers(n, onMove, getInitialLayout) {
         state = state.withMutations(function (s) {
           return s['delete']('initialLayout')['delete']('initialTouches');
         });
-
         paused = true;
       }
     }, o.onError.bind(o), o.onCompleted.bind(o));

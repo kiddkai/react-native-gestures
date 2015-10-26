@@ -4,4 +4,4 @@ module.exports = {
   create: require('./create'),
   draggable: require('./draggable'),
   GestureView: require('./GestureView')
-};
+}

@@ -1,19 +1,17 @@
-const Rx = require('rx');
+import Rx from 'rx'
 
-export default function events(evs = []) {
-  var streams = evs.reduce(function(res, eventName) {
-    res[eventName] = new Rx.Subject();
-    return res;
-  }, {});
+export default function events (evs = []) {
+  var streams = evs.reduce(function (res, eventName) {
+    res[eventName] = new Rx.Subject()
+    return res
+  }, {})
 
   return {
-    componentWillMount: function() {
-      Object.assign(this, streams);
+    componentWillMount () {
+      Object.assign(this, streams)
     },
-    componentWillUnmount: function() {
-      evs.forEach(function(ev) {
-        streams[ev].onCompleted();
-      });
+    componentWillUnmount () {
+      evs.forEach((ev) => streams[ev].onCompleted())
     }
-  };
+  }
 }
