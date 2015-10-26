@@ -1,4 +1,4 @@
-const { fromJS } = require('Immutable');
+const { fromJS } = require('immutable');
 const { into } = require('transducers.js');
 const gestureDrag = require('../../src/drag');
 
