@@ -1,6 +1,6 @@
 {
   "name": "react-native-gestures",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "composable gesture system in react native",
   "main": "dist/index.js",
   "scripts": {
