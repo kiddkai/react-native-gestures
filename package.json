@@ -1,0 +1,44 @@
+{
+  "name": "react-native-gestures",
+  "version": "0.1.0",
+  "description": "composable gesture system in react native",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel/register --recursive --require should",
+    "start": "node_modules/.bin/babel src --out-dir dist",
+    "watch": "node_modules/.bin/babel src --out-dir dist --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiddkai/react-native-gestures.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "ios",
+    "gestures",
+    "pinch",
+    "zoom",
+    "drag",
+    "drop"
+  ],
+  "author": "kiddkai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kiddkai/react-native-gestures/issues"
+  },
+  "homepage": "https://github.com/kiddkai/react-native-gestures#readme",
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "mocha": "^2.3.3",
+    "proxyquire": "^1.7.3",
+    "should": "^7.1.1",
+    "sinon": "^1.17.2"
+  },
+  "dependencies": {
+    "immutable": "^3.7.5",
+    "ramda": "^0.18.0",
+    "rx": "^4.0.6",
+    "transducers.js": "^0.3.2"
+  }
+}
