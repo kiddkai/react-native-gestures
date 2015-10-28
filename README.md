@@ -18,9 +18,20 @@ Showcase
 
 ![](http://i.imgur.com/qxzroIb.gif?1)
 
+Getting Start
+--------------
 
-Quick Sample
-------------
+Assuming you are using `react-native`, because I don't know how it will work
+in other libraries...
+
+* Install via npm
+
+```bash
+npm i -S react-native-gestures
+```
+
+Then write some js like the simple code samples as a React component
+and render it in your `react-native` app.
 
 ```js
 import React, {
@@ -57,6 +68,61 @@ export default React.createClass({
   }
 });
 ```
+
+APIs
+----------
+
+### <GestureView>
+
+As you can see, it's just a very simple React component you can use in this package, maybe
+it will have more components in the future, or not.
+
+There are few properties it accpets:
+
+* gestures - a `Array` of [gesture](#gestures)s 
+* onError  - a `Function` will be called when anything bad happens
+* style    - a `style` same as `<View>`'s `style` property
+* children - ... you know, just React children, nothing special
+
+Example:
+
+```js
+let style = { position: 'absolute', backgroundColor: '#F00' };
+
+<GestureView
+  style={style}
+  onError={console.error.bind(console)}
+  gestures={[...]}>
+  <Text>This is the children I say</Text>
+</GestureView>
+```
+
+### Gestures
+
+Every gesture in this module is just a simple combination of two things:
+
+1. A `transducer` called `calculate`(please suggest me a better name)
+
+   This is the actual function that calculates the new positions of the view
+   when the move gesture event comes in.
+
+2. A `number` called `GESTURE_NUMBER`
+  
+   This define that the gesture will start calculate when the gesture number
+   matches this number.
+
+   You can set any number you want if your touch screen supports it :p
+
+
+#### drag
+
+It's just a simple transducer takes one finger input with the move of the
+finger and generates new layout of the component.
+
+#### pinch
+
+It's a pinch gesture, also a zoom gesture. It takes two fingers gestures and
+generates new layout of the component.
 
 Contribute
 ----------
