@@ -1,6 +1,8 @@
 import Rx from 'rx'
-import create from './create'
+import create from '../create'
 import { PanResponder } from 'react-native'
+
+function yes () { return true }
 
 export default function draggableMixin (gestureDefs) {
   gestureDefs = gestureDefs || []
@@ -20,9 +22,7 @@ export default function draggableMixin (gestureDefs) {
       this
         .onLayout
         .take(1)
-        .subscribe((ev) => {
-          target = ev.target
-        })
+        .subscribe(ev => target = ev.target)
 
       this
         .onLayout
@@ -35,16 +35,16 @@ export default function draggableMixin (gestureDefs) {
       }
 
       this.gestureResponder = PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
-        onStartShouldSetPanResponderCapture: () => true,
-        onMoveShouldSetPanResponder: () => true,
-        onMoveShouldSetPanResponderCapture: () => true,
+        onStartShouldSetPanResponder: yes,
+        onStartShouldSetPanResponderCapture: yes,
+        onMoveShouldSetPanResponder: yes,
+        onMoveShouldSetPanResponderCapture: yes,
         onPanResponderGrant: (evt) => onDragStart.onNext(evt.nativeEvent),
         onPanResponderMove: (evt, gestureState) => onDragMove.onNext(evt.nativeEvent),
-        onPanResponderTerminationRequest: () => true,
+        onPanResponderTerminationRequest: yes,
         onPanResponderRelease: (evt) => onDragRelease.onNext(evt.nativeEvent),
-        onPanResponderTerminate: () => true,
-        onShouldBlockNativeResponder: () => true
+        onPanResponderTerminate: yes,
+        onShouldBlockNativeResponder: yes
       })
 
       if (this.props && this.props.gestures) {
@@ -53,8 +53,8 @@ export default function draggableMixin (gestureDefs) {
 
       this.layoutStream = Rx
         .Observable
-        .merge(gestureDefs.map((options) =>
-          create(options, getInitialLayout, draggable)))
+        .merge(gestureDefs.map(def =>
+          create(def.responder, def.transducer, getInitialLayout, draggable)))
     }
   }
 }

@@ -1,5 +1,5 @@
-import events from './events'
-import draggableMixin from './draggable'
+import events from './mixins/events'
+import draggableMixin from './mixins/draggable'
 import React, {
   PropTypes,
   View
@@ -11,6 +11,7 @@ export default React.createClass({
   propTypes: {
     gestures: PropTypes.array.isRequired,
     onError: PropTypes.func.isRequired,
+    toStyle: PropTypes.func.isRequired,
     style: PropTypes.any,
     children: PropTypes.array
   },
@@ -18,12 +19,7 @@ export default React.createClass({
   componentDidMount () {
     this.layoutStream.subscribe(
       (layout) => this.container.setNativeProps({
-        style: {
-          height: layout.height,
-          width: layout.width,
-          top: layout.y,
-          left: layout.x
-        }
+        style: this.props.toStyle(layout)
       }),
       (err) => this.props.onError(err)
     )
