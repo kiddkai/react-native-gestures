@@ -37,8 +37,8 @@
     "standard": "^5.3.1"
   },
   "dependencies": {
+    "curry": "^1.2.0",
     "immutable": "^3.7.5",
-    "ramda": "^0.18.0",
     "rx": "^4.0.6",
     "transducers.js": "^0.3.2"
   },

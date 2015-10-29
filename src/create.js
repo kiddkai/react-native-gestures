@@ -1,4 +1,4 @@
-import { curry } from 'ramda'
+import curry from 'curry'
 
 function createGesture (responder, transducer, getInitialLayout, draggable) {
   return draggable

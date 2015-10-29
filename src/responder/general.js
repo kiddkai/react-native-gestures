@@ -8,6 +8,7 @@
 
 import Rx from 'rx'
 import Immutable from 'immutable'
+import curry from 'curry'
 
 function toImmutableTouch (touch) {
   return Immutable.Map({
@@ -27,7 +28,7 @@ function reset (s) {
     .delete('initialTouches')
 }
 
-export default function genernalResponder (n, onMove, getInitialLayout) {
+function genernalResponder (n, onMove, getInitialLayout) {
   return Rx.Observable.create(function (o) {
     var state = Immutable.Map()
     var paused = false
@@ -79,3 +80,5 @@ export default function genernalResponder (n, onMove, getInitialLayout) {
     }
   })
 }
+
+export default curry(genernalResponder)
