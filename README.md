@@ -16,7 +16,7 @@ React Native Gestures
 Showcase
 --------
 
-![](http://i.imgur.com/qxzroIb.gif?1)
+![](http://imgur.com/6dCrcfL.gif)
 
 Getting Start
 --------------
@@ -52,16 +52,21 @@ export default React.createClass({
     },
     return (
       <View>
-        <GestureView gestures={[drag]}>
-          <Text>I can move</Text>
-        </GestureView>
-
-        <GestureView gestures={[pinch]}>
-          <Text>I can do pinch</Text>
-        </GestureView>
-
-        <GestureView gestures={[pinch, drag]}>
-          <Text>I can move and pinch</Text>
+        <GestureView
+          style={movable}
+          gestures={[drag, pinch]}
+          toStyle={(layout) => {
+            return {
+              top: layout.y,
+              left: layout.x,
+              width: layout.width,
+              height: layout.height,
+              transform: [{rotate: `${layout.rotate}deg`}]
+            }
+          }}
+          onError={console.error.bind(console)}>
+          <Text>HEHE</Text>
+          <Text>HEHE</Text>
         </GestureView>
       </View>
     );
@@ -82,6 +87,7 @@ There are few properties it accpets:
 * gestures - a `Array` of [gesture](#gestures)s 
 * onError  - a `Function` will be called when anything bad happens
 * style    - a `style` same as `<View>`'s `style` property
+* toStyle  - a mapping function that allow you to pick the changes you want to css style
 * children - ... you know, just React children, nothing special
 
 Example:

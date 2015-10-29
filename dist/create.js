@@ -4,17 +4,11 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 var _ramda = require('ramda');
 
-var _withSpecificPointerNumbers = require('./withSpecificPointerNumbers');
-
-var _withSpecificPointerNumbers2 = _interopRequireDefault(_withSpecificPointerNumbers);
-
-function createGesture(options, getInitialLayout, draggable) {
+function createGesture(responder, transducer, getInitialLayout, draggable) {
   return draggable.onDragStart.flatMap(function () {
-    return (0, _withSpecificPointerNumbers2['default'])(options.GESTURE_NUMBER, draggable.onDragMove, getInitialLayout).transduce(options.calculate).takeUntil(draggable.onDragRelease);
+    return responder(draggable.onDragMove, getInitialLayout).transduce(transducer).takeUntil(draggable.onDragRelease);
   });
 };
 

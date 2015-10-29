@@ -11,11 +11,15 @@ var _rx = require('rx');
 
 var _rx2 = _interopRequireDefault(_rx);
 
-var _create = require('./create');
+var _create = require('../create');
 
 var _create2 = _interopRequireDefault(_create);
 
 var _reactNative = require('react-native');
+
+function yes() {
+  return true;
+}
 
 function draggableMixin(gestureDefs) {
   gestureDefs = gestureDefs || [];
@@ -37,7 +41,7 @@ function draggableMixin(gestureDefs) {
       var onDragRelease = new _rx2['default'].Subject();
 
       this.onLayout.take(1).subscribe(function (ev) {
-        target = ev.target;
+        return target = ev.target;
       });
 
       this.onLayout.subscribe(function (ev) {
@@ -51,44 +55,30 @@ function draggableMixin(gestureDefs) {
       };
 
       this.gestureResponder = _reactNative.PanResponder.create({
-        onStartShouldSetPanResponder: function onStartShouldSetPanResponder() {
-          return true;
-        },
-        onStartShouldSetPanResponderCapture: function onStartShouldSetPanResponderCapture() {
-          return true;
-        },
-        onMoveShouldSetPanResponder: function onMoveShouldSetPanResponder() {
-          return true;
-        },
-        onMoveShouldSetPanResponderCapture: function onMoveShouldSetPanResponderCapture() {
-          return true;
-        },
+        onStartShouldSetPanResponder: yes,
+        onStartShouldSetPanResponderCapture: yes,
+        onMoveShouldSetPanResponder: yes,
+        onMoveShouldSetPanResponderCapture: yes,
         onPanResponderGrant: function onPanResponderGrant(evt) {
           return onDragStart.onNext(evt.nativeEvent);
         },
         onPanResponderMove: function onPanResponderMove(evt, gestureState) {
           return onDragMove.onNext(evt.nativeEvent);
         },
-        onPanResponderTerminationRequest: function onPanResponderTerminationRequest() {
-          return true;
-        },
+        onPanResponderTerminationRequest: yes,
         onPanResponderRelease: function onPanResponderRelease(evt) {
           return onDragRelease.onNext(evt.nativeEvent);
         },
-        onPanResponderTerminate: function onPanResponderTerminate() {
-          return true;
-        },
-        onShouldBlockNativeResponder: function onShouldBlockNativeResponder() {
-          return true;
-        }
+        onPanResponderTerminate: yes,
+        onShouldBlockNativeResponder: yes
       });
 
       if (this.props && this.props.gestures) {
         gestureDefs = gestureDefs.concat(this.props.gestures);
       }
 
-      this.layoutStream = _rx2['default'].Observable.merge(gestureDefs.map(function (options) {
-        return (0, _create2['default'])(options, getInitialLayout, draggable);
+      this.layoutStream = _rx2['default'].Observable.merge(gestureDefs.map(function (def) {
+        return (0, _create2['default'])(def.responder, def.transducer, getInitialLayout, draggable);
       }));
     }
   };

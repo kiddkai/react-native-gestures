@@ -1,9 +1,17 @@
+/**
+ * Here is the beggining of everything. All the other responders
+ * including one finger touch responder and two finger touch responder
+ * will use this responder as the basic responder, what the other
+ * responder will do is adding properties to the result which comes
+ * from this responder.
+ */
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports['default'] = withSpecificPointerNumbers;
+exports['default'] = genernalResponder;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -27,7 +35,11 @@ function toImmutableTouch(touch) {
   });
 }
 
-function withSpecificPointerNumbers(n, onMove, getInitialLayout) {
+function reset(s) {
+  return s['delete']('initialLayout')['delete']('initialTouches');
+}
+
+function genernalResponder(n, onMove, getInitialLayout) {
   return _rx2['default'].Observable.create(function (o) {
     var state = _immutable2['default'].Map();
     var paused = false;
@@ -56,9 +68,7 @@ function withSpecificPointerNumbers(n, onMove, getInitialLayout) {
           return;
         }
 
-        state = state.withMutations(function (s) {
-          return s['delete']('initialLayout')['delete']('initialTouches');
-        });
+        state = state.withMutations(reset);
         paused = true;
       }
     }, o.onError.bind(o), o.onCompleted.bind(o));

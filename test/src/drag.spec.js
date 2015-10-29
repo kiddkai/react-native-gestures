@@ -1,8 +1,8 @@
-const { fromJS } = require('immutable');
-const { into } = require('transducers.js');
-const gestureDrag = require('../../src/drag');
+const { fromJS } = require('immutable')
+const { into } = require('transducers.js')
+const gestureDrag = require('../../src/drag')
 
-function touch(pageX, pageY) {
+function touch (pageX, pageY) {
   return fromJS({
     pageX,
     pageY,
@@ -10,10 +10,10 @@ function touch(pageX, pageY) {
     locationY: pageY,
     target: 10,
     timestamp: 1
-  });
+  })
 }
 
-function gesture(pageX, pageY, t) {
+function gesture (pageX, pageY, t) {
   return fromJS({
     initialLayout: {
       x: 100,
@@ -23,17 +23,17 @@ function gesture(pageX, pageY, t) {
     },
     touches: [t],
     initialTouches: [touch(pageX, pageY)]
-  }); 
+  })
 }
 
-describe('Gesture Drag', function() {
-  it('calculates the differences between initialTouch and currentTouch', function() {
+describe('Gesture Drag', function () {
+  it('calculates the differences between initialTouch and currentTouch', function () {
     let result = into(
       [],
-      gestureDrag.calculate,
-      [gesture(100, 100, touch(101, 99))]);
+      gestureDrag.transducer,
+      [gesture(100, 100, touch(101, 99))])
 
-    result[0].x.should.equal(101);
-    result[0].y.should.equal(99);
-  });
-});
+    result[0].x.should.equal(101)
+    result[0].y.should.equal(99)
+  })
+})

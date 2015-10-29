@@ -1,3 +1,11 @@
+/**
+ * Here is the beggining of everything. All the other responders
+ * including one finger touch responder and two finger touch responder
+ * will use this responder as the basic responder, what the other
+ * responder will do is adding properties to the result which comes
+ * from this responder.
+ */
+
 import Rx from 'rx'
 import Immutable from 'immutable'
 
@@ -13,7 +21,13 @@ function toImmutableTouch (touch) {
   })
 }
 
-export default function withSpecificPointerNumbers (n, onMove, getInitialLayout) {
+function reset (s) {
+  return s
+    .delete('initialLayout')
+    .delete('initialTouches')
+}
+
+export default function genernalResponder (n, onMove, getInitialLayout) {
   return Rx.Observable.create(function (o) {
     var state = Immutable.Map()
     var paused = false
@@ -52,9 +66,7 @@ export default function withSpecificPointerNumbers (n, onMove, getInitialLayout)
               return
             }
 
-            state = state.withMutations(s => s
-              .delete('initialLayout')
-              .delete('initialTouches'))
+            state = state.withMutations(reset)
             paused = true
           }
         },

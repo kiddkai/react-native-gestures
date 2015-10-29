@@ -1,4 +1,2 @@
-const gesturePinch = require('../../src/pinch');
-
-describe('Gesture Pinch', function() {
-});
+describe('Gesture Pinch', function () {
+})

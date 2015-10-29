@@ -8,13 +8,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _events = require('./events');
+var _mixinsEvents = require('./mixins/events');
 
-var _events2 = _interopRequireDefault(_events);
+var _mixinsEvents2 = _interopRequireDefault(_mixinsEvents);
 
-var _draggable = require('./draggable');
+var _mixinsDraggable = require('./mixins/draggable');
 
-var _draggable2 = _interopRequireDefault(_draggable);
+var _mixinsDraggable2 = _interopRequireDefault(_mixinsDraggable);
 
 var _reactNative = require('react-native');
 
@@ -23,11 +23,12 @@ var _reactNative2 = _interopRequireDefault(_reactNative);
 exports['default'] = _reactNative2['default'].createClass({
   displayName: 'GestureView',
 
-  mixins: [(0, _events2['default'])(['onLayout']), (0, _draggable2['default'])()],
+  mixins: [(0, _mixinsEvents2['default'])(['onLayout']), (0, _mixinsDraggable2['default'])()],
 
   propTypes: {
     gestures: _reactNative.PropTypes.array.isRequired,
     onError: _reactNative.PropTypes.func.isRequired,
+    toStyle: _reactNative.PropTypes.func.isRequired,
     style: _reactNative.PropTypes.any,
     children: _reactNative.PropTypes.array
   },
@@ -37,12 +38,7 @@ exports['default'] = _reactNative2['default'].createClass({
 
     this.layoutStream.subscribe(function (layout) {
       return _this.container.setNativeProps({
-        style: {
-          height: layout.height,
-          width: layout.width,
-          top: layout.y,
-          left: layout.x
-        }
+        style: _this.props.toStyle(layout)
       });
     }, function (err) {
       return _this.props.onError(err);
