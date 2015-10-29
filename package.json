@@ -1,6 +1,6 @@
 {
   "name": "react-native-gestures",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "composable gesture system in react native",
   "main": "dist/index.js",
   "scripts": {
@@ -43,6 +43,13 @@
     "transducers.js": "^0.3.2"
   },
   "standard": {
-    "globals": [ "describe", "it", "before", "after", "beforeEach", "afterEach" ]
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach"
+    ]
   }
 }
