@@ -4,7 +4,11 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _ramda = require('ramda');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _curry = require('curry');
+
+var _curry2 = _interopRequireDefault(_curry);
 
 function createGesture(responder, transducer, getInitialLayout, draggable) {
   return draggable.onDragStart.flatMap(function () {
@@ -12,5 +16,5 @@ function createGesture(responder, transducer, getInitialLayout, draggable) {
   });
 };
 
-exports['default'] = (0, _ramda.curry)(createGesture);
+exports['default'] = (0, _curry2['default'])(createGesture);
 module.exports = exports['default'];

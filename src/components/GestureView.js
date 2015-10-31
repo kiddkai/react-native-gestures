@@ -5,7 +5,7 @@ import React, {
   View
 } from 'react-native'
 
-export default React.createClass({
+var GestureView = React.createClass({
   mixins: [events(['onLayout']), draggableMixin()],
 
   propTypes: {
@@ -42,3 +42,5 @@ export default React.createClass({
     )
   }
 })
+
+module.exports = GestureView

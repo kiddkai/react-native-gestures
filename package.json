@@ -6,7 +6,8 @@
   "scripts": {
     "test": "standard src/*.js && mocha --compilers js:babel/register --recursive --require should",
     "start": "node_modules/.bin/babel src --out-dir dist",
-    "watch": "node_modules/.bin/babel src --out-dir dist --watch"
+    "watch": "node_modules/.bin/babel src --out-dir dist --watch",
+    "docgen": "react-docgen ./src/components/* | ./scripts/build-docs.sh"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "babel": "^5.8.29",
     "mocha": "^2.3.3",
     "proxyquire": "^1.7.3",
+    "react-docgen": "^2.4.0",
     "should": "^7.1.1",
     "sinon": "^1.17.2",
     "standard": "^5.3.1"
