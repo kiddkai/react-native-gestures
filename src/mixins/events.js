@@ -1,6 +1,6 @@
-import Rx from 'rx'
+const Rx = require('rx')
 
-export default function events (evs = []) {
+module.exports = function events (evs = []) {
   var streams = evs.reduce(function (res, eventName) {
     res[eventName] = new Rx.Subject()
     return res

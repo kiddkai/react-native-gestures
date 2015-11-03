@@ -1,4 +1,4 @@
-import curry from 'curry'
+const curry = require('curry')
 
 function createGesture (responder, transducer, getInitialLayout, draggable) {
   return draggable
@@ -13,4 +13,4 @@ function createGesture (responder, transducer, getInitialLayout, draggable) {
     })
 };
 
-export default curry(createGesture)
+module.exports = curry(createGesture)

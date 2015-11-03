@@ -4,7 +4,7 @@ module.exports = {
   create: require('./create'),
   draggable: require('./mixins/draggable'),
   events: require('./mixins/events'),
-  GestureView: require('./GestureView'),
+  GestureView: require('./components/GestureView'),
   responders: {
     general: require('./responder/general'),
     oneFinger: require('./responder/oneFinger'),

@@ -1,5 +1,5 @@
-import genernalResponder from './general'
+const genernalResponder = require('./general')
 
-export default function oneFingerResponder (onMove, getInitialLayout) {
+module.exports = function oneFingerResponder (onMove, getInitialLayout) {
   return genernalResponder(1, onMove, getInitialLayout)
 }
