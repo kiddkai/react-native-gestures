@@ -12,8 +12,8 @@
  * 6. centerDiff - the different of the center point
  */
 
-import { Map } from 'immutable'
-import genernalResponder from './general'
+const Map = require('immutable').Map
+const genernalResponder = require('./general')
 
 function center (touches) {
   let a = touches.get(0)
@@ -85,6 +85,6 @@ function extend (gesture) {
   return gesture.withMutations(mutate)
 }
 
-export default function twoFingerResponder (onMove, getInitialLayout) {
+module.exports = function twoFingerResponder (onMove, getInitialLayout) {
   return genernalResponder(2, onMove, getInitialLayout).map(extend)
 }

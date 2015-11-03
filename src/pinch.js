@@ -1,9 +1,9 @@
-import twoFingerResponder from './responder/twoFinger'
-import { map } from 'transducers.js'
+const twoFingerResponder = require('./responder/twoFinger')
+const map = require('transducers.js').map
 
-export let responder = twoFingerResponder
+exports.responder = twoFingerResponder
 
-export let transducer = map(function (gesture) {
+exports.transducer = map(function (gesture) {
   let layout = gesture.get('initialLayout')
   let startX = layout.get('x')
   let startY = layout.get('y')

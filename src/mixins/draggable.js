@@ -1,10 +1,12 @@
-import Rx from 'rx'
-import create from '../create'
-import { PanResponder } from 'react-native'
+const Rx = require('rx')
+const create = require('../create')
+const React = require('react-native')
+
+const { PanResponder } = React
 
 function yes () { return true }
 
-export default function draggableMixin (gestureDefs) {
+module.exports = function draggableMixin (gestureDefs) {
   gestureDefs = gestureDefs || []
 
   var target

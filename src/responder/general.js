@@ -6,9 +6,9 @@
  * from this responder.
  */
 
-import Rx from 'rx'
-import Immutable from 'immutable'
-import curry from 'curry'
+const Rx = require('rx')
+const Immutable = require('immutable')
+const curry = require('curry')
 
 function toImmutableTouch (touch) {
   return Immutable.Map({
@@ -81,4 +81,4 @@ function genernalResponder (n, onMove, getInitialLayout) {
   })
 }
 
-export default curry(genernalResponder)
+module.exports = curry(genernalResponder)

@@ -1,9 +1,10 @@
-import events from './mixins/events'
-import draggableMixin from './mixins/draggable'
-import React, {
+const events = require('./mixins/events')
+const draggableMixin = require('./mixins/draggable')
+const React = require('react-native')
+const {
   PropTypes,
   View
-} from 'react-native'
+} = React
 
 var GestureView = React.createClass({
   mixins: [events(['onLayout']), draggableMixin()],
