@@ -30,7 +30,9 @@ exports['default'] = _reactNative2['default'].createClass({
     onError: _reactNative.PropTypes.func.isRequired,
     toStyle: _reactNative.PropTypes.func.isRequired,
     style: _reactNative.PropTypes.any,
-    children: _reactNative.PropTypes.array
+    children: _reactNative.PropTypes.array,
+    type: _reactNative.PropTypes.string,
+    source: _reactNative.PropTypes.any
   },
 
   componentDidMount: function componentDidMount() {
@@ -57,13 +59,18 @@ exports['default'] = _reactNative2['default'].createClass({
         var nativeEvent = _ref.nativeEvent;
 
         _this2.onLayout.onNext(nativeEvent);
-      }
+      },
+      type: this.props.type || 'View',
+      source: this.props.source
     }, this.gestureResponder.panHandlers);
-
     return _reactNative2['default'].createElement(
       _reactNative.View,
-      props,
-      this.props.children
+      null,
+      this.props.type === 'View' ? _reactNative2['default'].createElement(
+        _reactNative.View,
+        props,
+        this.props.children
+      ) : _reactNative2['default'].createElement(_reactNative.Image, props)
     );
   }
 });

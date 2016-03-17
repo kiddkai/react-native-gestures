@@ -2,7 +2,8 @@ import events from './mixins/events'
 import draggableMixin from './mixins/draggable'
 import React, {
   PropTypes,
-  View
+  View,
+  Image
 } from 'react-native'
 
 export default React.createClass({
@@ -13,7 +14,9 @@ export default React.createClass({
     onError: PropTypes.func.isRequired,
     toStyle: PropTypes.func.isRequired,
     style: PropTypes.any,
-    children: PropTypes.array
+    children: PropTypes.array,
+    type: PropTypes.string,
+    source: PropTypes.any
   },
 
   componentDidMount () {
@@ -32,12 +35,19 @@ export default React.createClass({
       onLayout: ({nativeEvent}) => {
         this.onLayout.onNext(nativeEvent)
       },
+      type: this.props.type || 'View',
+      source: this.props.source,
       ...this.gestureResponder.panHandlers
     }
-
     return (
-      <View {...props}>
-        {this.props.children}
+      <View>
+        {this.props.type === 'View' ? (
+          <View {...props}>
+            {this.props.children}
+          </View>
+        ) : (
+          <Image {...props} />
+        )}
       </View>
     )
   }
