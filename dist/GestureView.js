@@ -31,7 +31,7 @@ exports['default'] = _reactNative2['default'].createClass({
     toStyle: _reactNative.PropTypes.func.isRequired,
     style: _reactNative.PropTypes.any,
     children: _reactNative.PropTypes.array,
-    type: _reactNative.PropTypes.string,
+    type: _reactNative.PropTypes.oneOf(['View', 'Image']),
     source: _reactNative.PropTypes.any
   },
 

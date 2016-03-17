@@ -15,7 +15,10 @@ export default React.createClass({
     toStyle: PropTypes.func.isRequired,
     style: PropTypes.any,
     children: PropTypes.array,
-    type: PropTypes.string,
+    type: PropTypes.oneOf([
+      'View',
+      'Image'
+    ]),
     source: PropTypes.any
   },
 
