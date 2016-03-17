@@ -11,7 +11,6 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports['default'] = genernalResponder;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -22,6 +21,10 @@ var _rx2 = _interopRequireDefault(_rx);
 var _immutable = require('immutable');
 
 var _immutable2 = _interopRequireDefault(_immutable);
+
+var _curry = require('curry');
+
+var _curry2 = _interopRequireDefault(_curry);
 
 function toImmutableTouch(touch) {
   return _immutable2['default'].Map({
@@ -79,4 +82,5 @@ function genernalResponder(n, onMove, getInitialLayout) {
   });
 }
 
+exports['default'] = (0, _curry2['default'])(genernalResponder);
 module.exports = exports['default'];
