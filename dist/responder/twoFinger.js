@@ -66,6 +66,8 @@ function angle(touches) {
 }
 
 function mutate(gesture) {
+  console.log(gesture);
+  console.log(gesture.get('initialLayout'));
   var initCenter = center(gesture.get('initialTouches'));
   var currentCenter = center(gesture.get('touches'));
   var initDistance = distance(gesture.get('initialTouches'));

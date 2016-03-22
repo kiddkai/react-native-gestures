@@ -14,7 +14,6 @@ export let transducer = map(function (gesture) {
   let newWidth = startWidth * scale
   let xWidthDiff = (newWidth - startWidth) / 2
   let yHeightDiff = (newHeight - startHeight) / 2
-
   return {
     x: startX - gesture.getIn(['centerDiff', 'x']) - xWidthDiff,
     y: startY - gesture.getIn(['centerDiff', 'y']) - yHeightDiff,
