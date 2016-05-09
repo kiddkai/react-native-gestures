@@ -1,6 +1,6 @@
-const React = require('react-native')
-const {drag, pinch, GestureView} = require('react-native-gestures')
-const {View, Text, StyleSheet} = React
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { drag, pinch, GestureView } from 'react-native-gestures';
 
 const styles = StyleSheet.create({
   container: {

@@ -16,23 +16,25 @@ var _mixinsDraggable = require('./mixins/draggable');
 
 var _mixinsDraggable2 = _interopRequireDefault(_mixinsDraggable);
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _reactNative = require('react-native');
 
-var _reactNative2 = _interopRequireDefault(_reactNative);
-
-exports['default'] = _reactNative2['default'].createClass({
+exports['default'] = _react2['default'].createClass({
   displayName: 'GestureView',
 
   mixins: [(0, _mixinsEvents2['default'])(['onLayout']), (0, _mixinsDraggable2['default'])()],
 
   propTypes: {
-    gestures: _reactNative.PropTypes.array.isRequired,
-    onError: _reactNative.PropTypes.func.isRequired,
-    toStyle: _reactNative.PropTypes.func.isRequired,
-    style: _reactNative.PropTypes.any,
-    children: _reactNative.PropTypes.array,
-    type: _reactNative.PropTypes.oneOf(['View', 'Image']),
-    source: _reactNative.PropTypes.any
+    gestures: _react.PropTypes.array.isRequired,
+    onError: _react.PropTypes.func.isRequired,
+    toStyle: _react.PropTypes.func.isRequired,
+    style: _react.PropTypes.any,
+    children: _react.PropTypes.array,
+    type: _react.PropTypes.oneOf(['View', 'Image']),
+    source: _react.PropTypes.any
   },
 
   componentDidMount: function componentDidMount() {
@@ -63,14 +65,14 @@ exports['default'] = _reactNative2['default'].createClass({
       type: this.props.type || 'View',
       source: this.props.source
     }, this.gestureResponder.panHandlers);
-    return _reactNative2['default'].createElement(
+    return _react2['default'].createElement(
       _reactNative.View,
       null,
-      this.props.type === 'View' ? _reactNative2['default'].createElement(
+      this.props.type === 'View' ? _react2['default'].createElement(
         _reactNative.View,
         props,
         this.props.children
-      ) : _reactNative2['default'].createElement(_reactNative.Image, props)
+      ) : _react2['default'].createElement(_reactNative.Image, props)
     );
   }
 });
