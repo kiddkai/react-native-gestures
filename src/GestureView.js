@@ -1,8 +1,8 @@
 import events from './mixins/events'
 import draggableMixin from './mixins/draggable'
 import React, {
-  PropTypes,
-} from 'react';
+  PropTypes
+} from 'react'
 import {
   View,
   Image
