@@ -17,9 +17,9 @@ var _create2 = _interopRequireDefault(_create);
 
 var _reactNative = require('react-native');
 
-function yes() {
+var yes = function yes() {
   return true;
-}
+};
 
 function draggableMixin(gestureDefs) {
   gestureDefs = gestureDefs || [];

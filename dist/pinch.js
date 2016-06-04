@@ -26,7 +26,6 @@ var transducer = (0, _transducersJs.map)(function (gesture) {
   var newWidth = startWidth * scale;
   var xWidthDiff = (newWidth - startWidth) / 2;
   var yHeightDiff = (newHeight - startHeight) / 2;
-
   return {
     x: startX - gesture.getIn(['centerDiff', 'x']) - xWidthDiff,
     y: startY - gesture.getIn(['centerDiff', 'y']) - yHeightDiff,

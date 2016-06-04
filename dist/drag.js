@@ -16,12 +16,11 @@ var responder = _responderOneFinger2['default'];
 
 exports.responder = responder;
 var transducer = (0, _transducersJs.map)(function (gesture) {
-  var layout = gesture.get('initialLayout').set('rotate', 0);
+  var layout = gesture.get('initialLayout');
   var initialTouch = gesture.get('initialTouches').get(0);
   var currentTouch = gesture.get('touches').get(0);
-
   return layout.withMutations(function (l) {
-    return l.set('x', l.get('x') + (currentTouch.get('pageX') - initialTouch.get('pageX'))).set('y', l.get('y') + (currentTouch.get('pageY') - initialTouch.get('pageY')));
+    return l.set('x', l.get('x') + (currentTouch.get('pageX') - initialTouch.get('pageX'))).set('y', l.get('y') + (currentTouch.get('pageY') - initialTouch.get('pageY'))).set('rotate', l.get('rotate'));
   }).toJS();
 });
 exports.transducer = transducer;

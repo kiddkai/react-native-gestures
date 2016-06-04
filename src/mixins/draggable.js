@@ -2,7 +2,7 @@ import Rx from 'rx'
 import create from '../create'
 import { PanResponder } from 'react-native'
 
-function yes () { return true }
+const yes = () => true;
 
 export default function draggableMixin (gestureDefs) {
   gestureDefs = gestureDefs || []
