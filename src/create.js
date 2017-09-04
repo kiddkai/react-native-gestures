@@ -1,16 +1,11 @@
-import curry from 'curry'
+import curry from "curry"
 
-function createGesture (responder, transducer, getInitialLayout, draggable) {
-  return draggable
-    .onDragStart
-    .flatMap(function () {
-      return responder(
-        draggable.onDragMove,
-        getInitialLayout
-      )
-      .transduce(transducer)
-      .takeUntil(draggable.onDragRelease)
+function create(responder, transducer, getInitialLayout, draggable) {
+    return draggable.onDragStart.flatMap(() => {
+        return responder(draggable.onDragMove, getInitialLayout)
+            .transduce(transducer)
+            .takeUntil(draggable.onDragRelease)
     })
-};
+}
 
-export default curry(createGesture)
+export default curry(create)

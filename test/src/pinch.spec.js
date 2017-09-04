@@ -1,2 +1,0 @@
-describe('Gesture Pinch', function () {
-})

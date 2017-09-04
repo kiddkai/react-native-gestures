@@ -1,54 +1,64 @@
 {
-  "name": "react-native-gestures",
-  "version": "0.3.0",
-  "description": "composable gesture system in react native",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "standard src/*.js && mocha --compilers js:babel/register --recursive --require should"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kiddkai/react-native-gestures.git"
-  },
-  "keywords": [
-    "react-native",
-    "react-component",
-    "ios",
-    "gestures",
-    "pinch",
-    "zoom",
-    "drag",
-    "drop"
-  ],
-  "author": "kiddkai",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kiddkai/react-native-gestures/issues"
-  },
-  "homepage": "https://github.com/kiddkai/react-native-gestures#readme",
-  "devDependencies": {
-    "babel": "^5.8.29",
-    "mocha": "^2.3.3",
-    "proxyquire": "^1.7.3",
-    "should": "^7.1.1",
-    "sinon": "^1.17.2",
-    "standard": "^5.3.1"
-  },
-  "dependencies": {
-    "curry": "^1.2.0",
-    "immutable": "^3.7.5",
-    "ramda": "^0.19.1",
-    "rx": "^4.0.6",
-    "transducers.js": "^0.3.2"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "it",
-      "before",
-      "after",
-      "beforeEach",
-      "afterEach"
-    ]
-  }
+    "name": "react-native-gestures",
+    "version": "0.3.0",
+    "description": "composable gesture system in react native",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watchAll",
+        "test:coverage": "jest --coverage",
+        "format": "prettier --tab-width 4 --semi false --trailing-comma all --write '{src,test,examples}/**/*.{js,json}'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kiddkai/react-native-gestures.git"
+    },
+    "keywords": [
+        "react-native",
+        "react-component",
+        "ios",
+        "gestures",
+        "pinch",
+        "zoom",
+        "drag",
+        "drop"
+    ],
+    "author": "kiddkai",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/kiddkai/react-native-gestures/issues"
+    },
+    "dependencies": {
+        "curry": "^1.2.0",
+        "immutable": "^3.7.5",
+        "lodash": "^4.17.4",
+        "ramda": "^0.19.1",
+        "rx": "^4.0.6",
+        "transducers.js": "^0.3.2"
+    },
+    "devDependencies": {
+        "babel-jest": "^20.0.3",
+        "babel-preset-react-native": "^3.0.2",
+        "jest": "^20.0.4",
+        "prettier": "^1.6.1",
+        "react": "16.0.0-alpha.12",
+        "react-native": "^0.48.0",
+        "react-test-renderer": "16.0.0-alpha.12",
+        "sinon": "^3.2.1"
+    },
+    "jest": {
+        "verbose": true,
+        "preset": "react-native",
+        "moduleDirectories": [
+            "node_modules",
+            "src"
+        ],
+        "unmockedModulePathPatterns": [
+            "node_modules",
+            "src"
+        ],
+        "transformIgnorePatterns": [
+            "node_modules/{react*}"
+        ]
+    }
 }
