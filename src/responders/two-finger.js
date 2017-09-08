@@ -13,7 +13,7 @@
  */
 
 import { Map } from "immutable"
-import genernalResponder from "./general"
+import general from "./general"
 
 function center(touches) {
     let a = touches.get(0)
@@ -93,5 +93,5 @@ function extend(gesture) {
 }
 
 export default function twoFingerResponder(onMove, getInitialLayout) {
-    return genernalResponder(2, onMove, getInitialLayout).map(extend)
+    return general(2, onMove, getInitialLayout).map(extend)
 }

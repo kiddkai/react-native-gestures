@@ -1,20 +1,15 @@
 import React, { Component } from "react"
-import { View } from "react-native"
+import { PanResponder, View } from "react-native"
 import PropTypes from "prop-types"
 import Rx from "rx"
-import omit from "lodash/omit"
 
-import evented from "./decorators/evented"
-import draggable from "./decorators/draggable"
+import create from "./create"
 
 class GestureView extends Component {
     static propTypes = {
         gestures: PropTypes.array,
         onLayout: PropTypes.func,
         onError: PropTypes.func,
-        streams: PropTypes.object,
-        layout: PropTypes.object,
-        responder: PropTypes.object,
     }
 
     static defaultProps = {
@@ -31,37 +26,93 @@ class GestureView extends Component {
             ],
         }),
         onError: () => {},
-        streams: {},
-        layout: null,
-        responder: null,
     }
 
-    componentWillReceiveProps(props) {
-        props.layout.subscribe(
+    state = {
+        responder: null,
+        stream: null,
+    }
+
+    componentDidMount() {
+        const onDragStart = new Rx.Subject()
+        const onDragMove = new Rx.Subject()
+        const onDragRelease = new Rx.Subject()
+
+        const draggable = {
+            onDragStart: onDragStart,
+            onDragMove: onDragMove,
+            onDragRelease: onDragRelease,
+        }
+
+        const responder = PanResponder.create({
+            onMoveShouldSetPanResponder: () => true,
+            onMoveShouldSetPanResponderCapture: () => true,
+            onPanResponderGrant: event => {
+                onDragStart.onNext(event.nativeEvent)
+            },
+            onPanResponderMove: event => {
+                onDragMove.onNext(event.nativeEvent)
+            },
+            onPanResponderTerminationRequest: () => true,
+            onPanResponderRelease: event => {
+                onDragRelease.onNext(event.nativeEvent)
+            },
+            onPanResponderTerminate: () => true,
+            onShouldBlockNativeResponder: () => true,
+            onStartShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponderCapture: () => true,
+        })
+
+        const stream = Rx.Observable.merge(
+            this.props.gestures.map(gesture =>
+                create(
+                    gesture.responder,
+                    gesture.transducer,
+                    () => this.layout,
+                    draggable,
+                ),
+            ),
+        )
+
+        stream.subscribe(
             layout => {
                 this.container.setNativeProps({
-                    style: props.onLayout(layout),
+                    style: this.props.onLayout(layout),
                 })
             },
             error => {
-                props.onError(error)
+                this.props.onError(error)
             },
         )
+
+        this.setState({
+            responder,
+            stream,
+        })
+    }
+
+    componentWillUnmount() {
+        this.state.stream.onComplete()
     }
 
     render() {
-        if (!this.props.responder) {
+        const { responder } = this.state
+
+        if (!responder) {
             return null
         }
 
         let props = {
             ...this.props,
-            ...this.props.responder.panHandlers,
+            ...responder.panHandlers,
             ref: container => {
                 this.container = container
             },
             onLayout: event => {
-                this.props.streams.onLayout.onNext(event.nativeEvent)
+                const { layout, target } = event.nativeEvent
+
+                this.layout = layout
+                this.target = target
             },
         }
 
@@ -69,6 +120,6 @@ class GestureView extends Component {
     }
 }
 
-export default evented(draggable(GestureView), ["onLayout"])
+export default GestureView
 
 export { GestureView }

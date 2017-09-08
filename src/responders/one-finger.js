@@ -1,5 +1,5 @@
-import genernalResponder from "./general"
+import general from "./general"
 
 export default function oneFingerResponder(onMove, getInitialLayout) {
-    return genernalResponder(1, onMove, getInitialLayout)
+    return general(1, onMove, getInitialLayout)
 }
