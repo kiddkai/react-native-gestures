@@ -1,0 +1,9 @@
+/.git
+/.gitignore
+/.travis.yml
+/changelog.md
+/docs
+/examples
+/hooks
+/readme.md
+/yarn.lock

@@ -13,65 +13,48 @@ React Native Gestures
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
 
-Showcase
---------
+Demo
+----
 
-![](http://imgur.com/6dCrcfL.gif)
+![](demo.gif)
 
-Getting Start
---------------
+Getting Started
+---------------
 
-Assuming you are using `react-native`, because I don't know how it will work
-in other libraries...
-
-* Install via npm
-
-```bash
-npm i -S react-native-gestures
+```sh
+yarn add react-native-gestures
 ```
 
-Then write some js like the simple code samples as a React component
-and render it in your `react-native` app.
+You can wrap elements using `GestureView`:
 
 ```js
-import React, {
-  View,
-  Text
-} from 'react-native';
+import React, { Component } from "react"
+import { Image, View } from "react-native"
+import { Gestures, GestureView } from "./gestures"
 
-import {
-  drag,
-  pinch,
-  GestureView
-} from 'react-native-gestures';
-
-export default React.createClass({
-  render() {
-    onGestureError(err) {
-      console.error(err);
+const styles = {
+    container: {
+        backgroundColor: "white",
+        flex: 1,
     },
-    return (
-      <View>
+    draggable: {
+        backgroundColor: "#f0f0f0",
+        position: "absolute",
+        width: 188,
+        height: 51,
+    },
+}
+
+const App = () => (
+    <View style={styles.container}>
         <GestureView
-          style={movable}
-          gestures={[drag, pinch]}
-          toStyle={(layout) => {
-            return {
-              top: layout.y,
-              left: layout.x,
-              width: layout.width,
-              height: layout.height,
-              transform: [{rotate: `${layout.rotate}deg`}]
-            }
-          }}
-          onError={console.error.bind(console)}>
-          <Text>HEHE</Text>
-          <Text>HEHE</Text>
+            style={styles.draggable}
+            gestures={[Gestures.drag, Gestures.pinch]}
+        >
+            <Image pointerEvents={"none"} source={require("./sample.png")} />
         </GestureView>
-      </View>
-    );
-  }
-});
+    </View>
+)
 ```
 
 APIs
@@ -82,24 +65,31 @@ APIs
 As you can see, it's just a very simple React component you can use in this package, maybe
 it will have more components in the future, or not.
 
-There are few properties it accpets:
+There are few properties it accepts:
 
-* gestures - a `Array` of [gesture](#gestures)s 
-* onError  - a `Function` will be called when anything bad happens
-* style    - a `style` same as `<View>`'s `style` property
-* toStyle  - a mapping function that allow you to pick the changes you want to css style
-* children - ... you know, just React children, nothing special
+* gestures - `Array` of [gesture](#gestures)
+* onLayout - mapping function that allow you to pick the changes you want to css style
+* onError  - `Function` will be called when anything bad happens
+* style    - `style` same as `<View>`'s `style` property
+* children - ...ordinary child components
 
 Example:
 
 ```js
-let style = { position: 'absolute', backgroundColor: '#F00' };
+const styles = {
+    draggable: {
+        backgroundColor: "#f0f0f0",
+        position: "absolute",
+        width: 188,
+        height: 51,
+    },
+}
 
 <GestureView
-  style={style}
-  onError={console.error.bind(console)}
-  gestures={[...]}>
-  <Text>This is the children I say</Text>
+    style={styles.draggable}
+    gestures={[Gestures.drag, Gestures.pinch]}
+>
+    <Image pointerEvents={"none"} source={require("./sample.png")} />
 </GestureView>
 ```
 
@@ -113,7 +103,7 @@ Every gesture in this module is just a simple combination of two things:
    when the move gesture event comes in.
 
 2. A `number` called `GESTURE_NUMBER`
-  
+
    This define that the gesture will start calculate when the gesture number
    matches this number.
 
@@ -129,11 +119,3 @@ finger and generates new layout of the component.
 
 It's a pinch gesture, also a zoom gesture. It takes two fingers gestures and
 generates new layout of the component.
-
-Contribute
-----------
-
-Using 
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
