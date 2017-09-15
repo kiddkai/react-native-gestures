@@ -91,10 +91,6 @@ class GestureView extends Component {
         })
     }
 
-    componentWillUnmount() {
-        this.state.stream.onComplete()
-    }
-
     render() {
         const { responder } = this.state
 
